@@ -19,8 +19,8 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", "https://unpkg.com", "https://fonts.googleapis.com"],
       // Allow Google Fonts injection
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      // Allow OpenStreetMap tiles and Leaflet markers
-      imgSrc: ["'self'", "data:", "https://*.tile.openstreetmap.org", "https://unpkg.com"],
+      // Allow OpenStreetMap, CARTO UI tiles, OpenTopoMap tiles, and Leaflet markers
+      imgSrc: ["'self'", "data:", "https://*.tile.openstreetmap.org", "https://unpkg.com", "https://*.basemaps.cartocdn.com", "https://*.tile.opentopomap.org"],
       // Allow OSRM Routing & Nominatim Geocoding API connections
       connectSrc: ["'self'", "https://nominatim.openstreetmap.org", "https://router.project-osrm.org"],
     },
