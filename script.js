@@ -158,9 +158,20 @@ async function getRoutesFromOSRM(src, dest) {
   }
 }
 
+// Security 4: Basic DOM Sanitization to strip potential XSS
+function sanitizeInput(str) {
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
 async function calculateRoutes() {
-  const sourceInput = document.getElementById('source').value;
-  const destInput = document.getElementById('destination').value;
+  const rawSource = document.getElementById('source').value.trim();
+  const rawDest = document.getElementById('destination').value.trim();
+  
+  // Sanitize user inputs rigorously before they hit anything else
+  const sourceInput = sanitizeInput(rawSource);
+  const destInput = sanitizeInput(rawDest);
   
   if (!sourceInput || !destInput) {
     alert("Please enter both Source and Destination.");
