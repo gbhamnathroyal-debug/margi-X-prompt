@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeRoute AI - Intelligent Commuting</title>
+    <meta name="description" content="SafeRoute AI helps you choose the safest route for your urban commute in real-time.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-mesh"></div>
+    <div class="glow-sphere sphere-1"></div>
+    <div class="glow-sphere sphere-2"></div>
+    <div class="glow-sphere sphere-3"></div>
+
+    <div class="alert-container" id="alertContainer"></div>
+
+    <main class="app-container">
+        <!-- Sidebar / Input Area -->
+        <section class="control-panel">
+            <header>
+                <div class="logo-wrapper">
+                    <i class="fa-solid fa-shield-halved logo-icon"></i>
+                    <h1>SafeRoute <span class="accent-text">AI</span></h1>
+                </div>
+                <p class="subtitle">Navigate smarter. Commute safer.</p>
+            </header>
+
+            <form id="routeForm" class="route-form">
+                <div class="input-group">
+                    <label for="source"><i class="fa-solid fa-location-dot"></i> From</label>
+                    <input type="text" id="source" placeholder="Enter starting point" required autocomplete="off">
+                </div>
+                
+                <div class="input-divider">
+                    <button type="button" class="swap-btn" title="Swap locations"><i class="fa-solid fa-arrow-down-up-across-line"></i></button>
+                    <div class="line"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="destination"><i class="fa-solid fa-location-crosshairs"></i> To</label>
+                    <input type="text" id="destination" placeholder="Enter destination" required autocomplete="off">
+                </div>
+
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <span class="setting-label"><i class="fa-regular fa-clock"></i> Environment</span>
+                        <div class="toggle-group">
+                            <input type="radio" id="timeDay" name="time" value="day" checked>
+                            <label for="timeDay" class="toggle-btn"><i class="fa-solid fa-sun"></i> Day</label>
+                            
+                            <input type="radio" id="timeNight" name="time" value="night">
+                            <label for="timeNight" class="toggle-btn"><i class="fa-solid fa-moon"></i> Night</label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <span class="setting-label"><i class="fa-solid fa-sliders"></i> Optimize For</span>
+                        <div class="toggle-group optimize-group">
+                            <input type="radio" id="optSafe" name="optimize" value="safe" checked>
+                            <label for="optSafe" class="toggle-btn"><i class="fa-solid fa-shield"></i> Safest</label>
+                            
+                            <input type="radio" id="optFast" name="optimize" value="fast">
+                            <label for="optFast" class="toggle-btn"><i class="fa-solid fa-bolt"></i> Fastest</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="action-btn generate-btn">
+                    <span class="btn-text">Generate Secure Routes</span>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <div class="btn-loader" style="display: none;"></div>
+                </button>
+            </form>
+        </section>
+
+        <!-- Visualization / Output Area -->
+        <section class="results-panel">
+            <div class="map-container" id="mapContainer">
+                <div class="map-placeholder">
+                    <div class="pulse-ring"></div>
+                    <i class="fa-solid fa-map-location-dot map-icon"></i>
+                    <p>Enter your destination to scan the area</p>
+                </div>
+                
+                <!-- SVG Map Overlay (Injected via JS) -->
+                <svg class="map-svg" id="mapCanvas" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+
+            <div class="routes-container" id="routesContainer">
+                <!-- Routes injected here via JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Templates -->
+    <template id="routeCardTemplate">
+        <div class="route-card">
+            <div class="route-header">
+                <div class="route-badge"></div>
+                <h3 class="route-name"></h3>
+                <div class="route-score">
+                    <span class="score-value"></span>
+                    <span class="score-label">/ 100</span>
+                </div>
+            </div>
+            <div class="route-metrics">
+                <div class="metric"><i class="fa-solid fa-clock"></i> <span class="time-val"></span></div>
+                <div class="metric"><i class="fa-solid fa-car-side"></i> <span class="dist-val"></span></div>
+            </div>
+            <div class="route-factors">
+                <div class="factor factor-crime" title="Crime Level"><i class="fa-solid fa-user-ninja"></i> <span></span></div>
+                <div class="factor factor-traffic" title="Traffic"><i class="fa-solid fa-traffic-light"></i> <span></span></div>
+                <div class="factor factor-light" title="Lighting"><i class="fa-regular fa-lightbulb"></i> <span></span></div>
+            </div>
+            <div class="route-warning" style="display: none;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span class="warning-text"></span>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+openapi: '3.0.3'
+info:
+  title: Live Context Mock API
+  version: '1.0'
+servers:
+  - url: http://127.0.0.1:4010
+paths:
+  /api/route-context:
+    post:
+      summary: Get live route contextual data
+      description: Returns simulated baseline average crime, traffic, and lighting for a polyline route.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                route_id:
+                  type: string
+                distance_km:
+                  type: number
+      responses:
+        '200':
+          description: Contextual route data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  base_crime_level:
+                    type: number
+                    description: 1-10 level (low is better)
+                  base_traffic_level:
+                    type: number
+                  base_lighting_level:
+                    type: number
+                    description: 1-10 level (high is better)
+                  weather_hazard:
+                    type: boolean
+              example:
+                base_crime_level: 5.5
+                base_traffic_level: 4.0
+                base_lighting_level: 6.0
+                weather_hazard: false

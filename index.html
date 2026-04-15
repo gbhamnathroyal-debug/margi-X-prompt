@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Margi AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- Map Container -->
+  <div id="map"></div>
+
+  <!-- Real-time Alerts Popup -->
+  <div id="alert-container" class="alert-container"></div>
+
+  <!-- Dashboard -->
+  <div class="dashboard">
+    <header class="header">
+      <h1 class="shiny-text">✨ Margi AI</h1>
+      <p>Intelligent, real-time urban navigation.</p>
+    </header>
+
+    <div class="controls">
+      <div class="input-group">
+        <label for="source">Source</label>
+        <input type="text" id="source" placeholder="e.g. Eiffel Tower, Paris">
+      </div>
+
+      <div class="input-group">
+        <label for="destination">Destination</label>
+        <input type="text" id="destination" placeholder="e.g. Louvre Museum, Paris">
+      </div>
+
+      <div class="toggles">
+        <div class="toggle-group">
+          <span class="toggle-label">Time of Day</span>
+          <button id="time-toggle" class="toggle-btn" data-state="day">🌞 Day</button>
+        </div>
+        <div class="toggle-group">
+          <span class="toggle-label">Optimization</span>
+          <button id="mode-toggle" class="toggle-btn" data-state="safest">🛡️ Safest</button>
+        </div>
+      </div>
+
+      <button id="calc-btn" class="primary-btn">Calculate Route</button>
+    </div>
+
+    <!-- Loading Area -->
+    <div id="loading" class="results hidden" style="text-align: center; padding-top: 1rem;">
+      <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Exploring Real-World Routes...</h3>
+      <p id="loading-text" style="font-size: 0.85rem; color: var(--text-secondary);">Querying Global Geocoders</p>
+    </div>
+
+    <!-- Results Area -->
+    <div id="results" class="results hidden">
+      <h2>Route Options</h2>
+      <div id="routes-list"></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="script.js"></script>
+</body>
+</html>
